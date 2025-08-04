@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1" />     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="sytlesheet.css"></link>
     <script src="scripts.js" defer></script>
@@ -12,34 +11,37 @@
 </head>
 <body>
     <div class="main">
-        <div class="display"></div>
+        <div class="displayRow">
+            <div class="display"></div>
+            <button id="sapte" value="0">0</button>
+        </div>
 
         <div class="buttons">
             <ol id="firstRow">
-                <li><button id="sapte">7</button></li>
-                <li><button id="opt">8</button></li>
-                <li><button id="noua">9</button></li>
+                <li><button id="sapte" value="7">7</button></li>
+                <li><button id="opt" value="8">8</button></li>
+                <li><button id="noua" value="9">9</button></li>
                 <li><button id="fractie">/</button></li>
             </ol>
 
             <ol id="secondRow">
-                <li><button id="patru">4</button></li>
-                <li><button id="cinci">5</button></li>
-                <li><button id="sase">6</button></li>
+                <li><button id="patru" value="4">4</button></li>
+                <li><button id="cinci" value="5">5</button></li>
+                <li><button id="sase" value="6">6</button></li>
                 <li><button id="imultire">*</button></li>
             </ol>
 
             <ol id="thirdRow">
-                <li><button id="doi">1</button></li>
-                <li><button id="trei">2</button></li>
-                <li><button id="trei">3</button></li>
+                <li><button id="unu" value="1">1</button></li>
+                <li><button id="doi" value="2">2</button></li>
+                <li><button id="trei" value="3">3</button></li>
                 <li><button id="scadere">-</button></li>
 
             </ol>
 
             <ol id="fourthRow">
-                <li><button id="egal">=</button></li>
-                <li><button id="plus">+</button></li>
+                <li><button id="egal" value="=">=</button></li>
+                <li><button id="plus" value="+">+</button></li>
             </ol>
 
         </div>

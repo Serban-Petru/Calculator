@@ -1,9 +1,35 @@
-// let string = prompt();
+let string = "";
 
 
 
 
-let array  = string.split("");
+const btn = document.querySelectorAll('#unu, #doi, #trei, #patru, #cinci, #sase, #sapte, #opt, #noua, #plus');
+const plus = document.querySelector("#plus");
+
+function show(num){ 
+  const display = document.querySelector(".display");
+  const digits = document.createElement("p");
+  digits.textContent = num;
+  display.appendChild(digits);
+}
+
+
+for(let i = 0; i < btn.length; i++){ 
+  btn[i].addEventListener("click",() =>{ 
+  string +=btn[i].value;
+  show(btn[i].value);
+});
+}
+
+egal.addEventListener("click",() =>{
+  let array  = string.split("");
+  calcul(array);
+  array="";
+  string="";
+});
+
+
+
 
 function add (a,b){return a+b;}
 
@@ -31,6 +57,7 @@ function returnSign(array){
 
 }
 
+function calcul(array){ 
 switch (String(array.filter(returnSign))) {
   case "+":
     console.log(add(Number(nr(string,"+")[0]), Number(nr(string,"+")[1])));
@@ -45,6 +72,7 @@ switch (String(array.filter(returnSign))) {
     console.log(divide(Number(nr(string,"/")[0]), Number(nr(string,"/")[1])));
     break;
   default:
-    console.log(undefined);
+    console.log("error");
 
+}
 }

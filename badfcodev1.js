@@ -34,25 +34,10 @@ egal.addEventListener("click",() =>{
 });
 
 
-function add (a,b){
-  return a+b;
-}
 
-function subtract(a,b){return a-b;}
-
-function multiply(a,b){ return a*b;}
-
-function divide(a,b){return a/b};
 
 let nr= function spliting(array_split,s){
   return array_split.split(s);
-}
-
-let changeLastNumber=function (){
-
-    let a = Number(nr(string,"+")[0]); 
-    let b = Number(nr(string,"+")[1]);
-    return [a,b];
 }
 
 

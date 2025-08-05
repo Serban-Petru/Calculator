@@ -1,17 +1,26 @@
-let string = "";
+function add (a,b){return a+b;}
+function subtract(a,b){return a-b;}
+function multiply(a,b){ return a*b;}
+function divide(a,b){return a/b};
 
+let string ="";
+let lastNumber = 0;
+let sign = "";
 
+const btn = document.querySelectorAll('#unu, #doi, #trei, #patru, #cinci, #sase, #sapte, #opt, #noua, #plus, #scadere, #fractie, #imultire');
+const display = document.querySelector(".display");
+const egal = document.querySelector("#egal");
 
-
-const btn = document.querySelectorAll('#unu, #doi, #trei, #patru, #cinci, #sase, #sapte, #opt, #noua, #plus');
-const plus = document.querySelector("#plus");
-
-function show(num){ 
-  const display = document.querySelector(".display");
+function show(num, flag){
   const digits = document.createElement("p");
+  if(flag === true){
+    display.textContent = lastNumber;
+    return;
+  }
   digits.textContent = num;
   display.appendChild(digits);
 }
+
 
 
 for(let i = 0; i < btn.length; i++){ 
@@ -21,58 +30,29 @@ for(let i = 0; i < btn.length; i++){
 });
 }
 
+function calcul(a,b){
+  switch(sign){
+    case "+": lastNumber = add(a,b);break;
+    case "-": lastNumber = subtract(a,b);break;
+    case "/": lastNumber = divide(a,b);break;
+    case "*": lastNumber = multiply(a,b);break;
+  }
+}
+
 egal.addEventListener("click",() =>{
-  let array  = string.split("");
-  calcul(array);
-  array="";
-  string="";
+  let a = Number(nr(string)[0]);
+  let b = Number(nr(string)[1]);
+  if(lastNumber != 0) 
+    a = lastNumber;
+  calcul(a,b);
+  show(lastNumber,true);
+  sign = "";
+  string = ""; //am stat mult la functioa asta si trebuie doar da adaug linia asta
 });
 
-
-
-
-function add (a,b){return a+b;}
-
-function subtract(a,b){return a-b;}
-
-function multiply(a,b){ return a*b;}
-
-function divide(a,b){return a/b};
-
-let nr= function spliting(array_split,s){
-  return array_split.split(s);
+let nr= function splitByOperator(str) {
+  let originalArray = str.split("");
+  sign = originalArray.find(char => ["+","-","*","/"].includes(char)); //this line if from Chatgpt:(
+  return str.split(sign);
 }
 
-function returnSign(array){
-    if(array === "+")
-        return array;
-    else if(array === "-")
-        return array;
-    else if(array === "*")
-        return array;
-    else if(array === "/")
-        return array;
-    else
-        return undefined;
-
-}
-
-function calcul(array){ 
-switch (String(array.filter(returnSign))) {
-  case "+":
-    console.log(add(Number(nr(string,"+")[0]), Number(nr(string,"+")[1])));
-    break;
-  case "-":
-    console.log(subtract(Number(nr(string,"-")[0]), Number(nr(string,"-")[1])));
-    break;
-  case "*":
-    console.log(multiply(Number(nr(string,"*")[0]), Number(nr(string,"*")[1])));
-    break;
-  case "/":
-    console.log(divide(Number(nr(string,"/")[0]), Number(nr(string,"/")[1])));
-    break;
-  default:
-    console.log("error");
-
-}
-}

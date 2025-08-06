@@ -76,3 +76,49 @@ switch (String(array.filter(returnSign))) {
 
 }
 }
+
+//v2
+
+// function add (a,b){return a+b;}
+// function subtract(a,b){return a-b;}
+// function multiply(a,b){ return a*b;}
+// function divide(a,b){return a/b};
+
+// let string ="";
+// let lastNumber = 0;
+// let sign = "";
+// let flagSign = 0;
+
+// const btn = document.querySelectorAll('#unu, #doi, #trei, #patru, #cinci, #sase, #sapte, #opt, #noua, #plus, #scadere, #fractie, #imultire');
+// // const plus = document.querySelector("#plus");
+// const semne = document.querySelectorAll("#plus, #scadere"); // TODO: implementare pentru toate semnele
+// const display = document.querySelector(".display");
+// const egal = document.querySelector("#egal");
+
+// function show(num, flag, semn = ""){
+//   const digits = document.createElement("p");
+//   if(flag === true){
+//     display.textContent = lastNumber;
+//     return;
+//   }
+//   digits.textContent = num;
+//   display.appendChild(digits);
+// }
+
+
+
+// for(let i = 0; i < btn.length; i++){ 
+//   btn[i].addEventListener("click",() =>{
+
+//   if(flagSign === 2){
+//     flagSign=1;
+//     string += sign+btn[i].value;
+//     show(btn[i].value);
+//   }
+//   else{
+//     string +=btn[i].value; 
+//     show(btn[i].value);
+//   }
+
+// });
+// }

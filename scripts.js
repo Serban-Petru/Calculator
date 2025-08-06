@@ -1,88 +1,87 @@
-function add (a,b){return a+b;}
-function subtract(a,b){return a-b;}
-function multiply(a,b){ return a*b;}
-function divide(a,b){return a/b};
+function add(a, b) { return a + b; }
+function subtract(a, b) { return a - b; }
+function multiply(a, b) { return a * b; }
+function divide(a, b) { return a / b; }
 
-let string ="";
+let string = "";
 let lastNumber = 0;
 let sign = "";
 let flagSign = 0;
 
-const btn = document.querySelectorAll('#unu, #doi, #trei, #patru, #cinci, #sase, #sapte, #opt, #noua, #plus, #scadere, #fractie, #imultire');
-// const plus = document.querySelector("#plus");
-const semne = document.querySelector("#plus, #scadere"); // TODO: implementare pentru toate semnele
+const btn = document.querySelectorAll('#unu, #doi, #trei, #patru, #cinci, #sase, #sapte, #opt, #noua, #zero');
+const semne = document.querySelectorAll("#plus, #scadere, #fractie, #imultire");
 const display = document.querySelector(".display");
 const egal = document.querySelector("#egal");
 
-function show(num, flag, semn = ""){
-  const digits = document.createElement("p");
-  if(flag === true){
-    display.textContent = lastNumber;
+function show(value, clear = false) {
+  if (clear) {
+    display.textContent = value;
     return;
   }
-  digits.textContent = num;
+
+  const digits = document.createElement("p");
+  digits.textContent = value;
   display.appendChild(digits);
 }
 
-
-
-for(let i = 0; i < btn.length; i++){ 
-  btn[i].addEventListener("click",() =>{
-    
-  if(flagSign === 2){
-    flagSign=1;
-    string += sign+btn[i].value;
-    console.log(string);
+// Add number buttons
+for (let i = 0; i < btn.length; i++) {
+  btn[i].addEventListener("click", () => {
+    string += btn[i].value;
     show(btn[i].value);
-  }
-  else{
-    string +=btn[i].value; 
-    console.log(string);
-    show(btn[i].value);
-  }
-
-});
+  });
 }
 
-function calcul(a,b){
-  switch(sign){
-    case "+": lastNumber = add(a,b);break;
-    case "-": lastNumber = subtract(a,b);break;
-    case "/": lastNumber = divide(a,b);break;
-    case "*": lastNumber = multiply(a,b);break;
-  }
+// Operation handler
+for (let i = 0; i < semne.length; i++) {
+  semne[i].addEventListener("click", () => {
+    flagSign++;
+
+    if (flagSign === 2) {
+      let [a, b] = nr(string, sign).map(Number);
+      if (!isNaN(lastNumber)) a = lastNumber;
+
+      calcul(a, b);
+      show(lastNumber, true);
+
+      string = lastNumber.toString();
+      flagSign = 1;
+    }
+
+    sign = semne[i].value;
+    string += sign;
+    show(sign);
+  });
 }
 
-plus.addEventListener("click",() =>{
-  flagSign++;
-  if(flagSign === 2){
-  let a = Number(nr(string)[0]);
-  let b = Number(nr(string)[1]);
-  if(lastNumber != 0) 
+// Equal button
+egal.addEventListener("click", () => {
+  let [a, b] = nr(string, sign).map(Number);
+
+  if (!string.includes(sign) && !isNaN(lastNumber)) {
     a = lastNumber;
-  calcul(a,b);
-  show(lastNumber,true, sign);
-  show(sign);
-  // sign = "";
-  string = ""; //am stat mult la functioa asta si trebuie doar da adaug linia asta
+  }
 
-}
-});
+  calcul(a, b);
+  show(lastNumber, true);
 
-egal.addEventListener("click",() =>{
-  let a = Number(nr(string)[0]);
-  let b = Number(nr(string)[1]);
-  if(lastNumber != 0) 
-    a = lastNumber;
-  calcul(a,b);
-  show(lastNumber,true);
+  string = lastNumber.toString();
   sign = "";
-  string = ""; //am stat mult la functioa asta si trebuie doar da adaug linia asta
+  flagSign = 0;
 });
 
-let nr= function splitByOperator(str) {
-  let originalArray = str.split("");
-  sign = originalArray.find(char => ["+","-","*","/"].includes(char)); //this line if from Chatgpt:(
-  return str.split(sign);
+// Calculation logic
+function calcul(a, b) {
+  switch (sign) {
+    case "+": lastNumber = add(a, b); break;
+    case "-": lastNumber = subtract(a, b); break;
+    case "*": lastNumber = multiply(a, b); break;
+    case "/": lastNumber = divide(a, b); break;
+  }
 }
 
+// Split string by operator
+function nr(str, currentSign) {
+  if (!currentSign) return [str, "0"];
+  return str.split(currentSign);
+}
